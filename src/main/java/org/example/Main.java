@@ -13,6 +13,10 @@ public class Main {
         String target = scanner.next();
         Objects.nonNull(target);
 
+        checkForWordOccurences(target);
+    }
+
+    private static void checkForWordOccurences(String target) {
         if (target instanceof String) {
             if (target.equalsIgnoreCase("quit")) {
                 System.out.println("The end");
