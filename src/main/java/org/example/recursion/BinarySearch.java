@@ -1,30 +1,44 @@
 package org.example.recursion;
 
+import java.util.stream.IntStream;
+
 public class BinarySearch {
 //    Zaimplementuj wyszukiwanie binarne na posortowanej tablicy intów o długości 100.
 
-    public static void main(String[] args) {
-        System.out.println(search(new int[]{1, 2, 3, 5, 6, 8, 9, 12, 14, 16}, 16));
-    }
 
-    public static boolean search(int[] array, int key) {
+    public boolean search(int[] array, int key) {
+        int length = array.length;
+        int mid = getMid(length);
 
-        int mid = array.length / 2;
-        if (array.length == 0) {
+        if (length == 0 || length == 1 && array[0] != key) {
             return false;
         }
-        if (key == array[mid]) {
+        if ((length == 1 && array[0] == key) || (length > 1 && key == array[mid])) {
             return true;
         }
 
         if (key < array[mid]) {
-            int[] left = new int[mid];
-            System.arraycopy(array, 0, left, 0, mid);
+            int[] left = generateSubarray(array, 0, mid);
             return search(left, key);
         } else {
-            int[] right = new int[mid];
-            System.arraycopy(array, mid, right, 0, mid);
-            return search(right, key);
+            int[] subArr = generateSubarray(array, mid, array.length);
+            return search(subArr, key);
         }
+    }
+
+    private static int[] generateSubarray(int[] array, int start, int end) {
+        return IntStream.range(start, end)
+                .map(i -> array[i])
+                .toArray();
+    }
+
+    private static int getMid(int length) {
+        int mid;
+        if (length % 2 == 0) {
+            mid = length / 2;
+        } else {
+            mid = 1 + length / 2;
+        }
+        return mid;
     }
 }

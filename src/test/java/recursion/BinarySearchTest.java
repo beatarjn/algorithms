@@ -1,23 +1,23 @@
 package recursion;
 
+import org.example.recursion.BinarySearch;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
 import java.util.stream.Stream;
 
-import static org.example.recursion.BinarySearch.search;
-import static org.example.recursion.Factorial.factorial;
-import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 
-public class BinarySearchTest {
+class BinarySearchTest {
+
+    private BinarySearch bs = new BinarySearch();
 
     @ParameterizedTest
     @MethodSource("provideTestData_True")
-    public void testBinarySearch_found(int[] array, int number) {
-        assertTrue(search(array, number));
+    void testBinarySearch_found(int[] array, int number) {
+        assertTrue(bs.search(array, number));
     }
 
     static Stream<Arguments> provideTestData_True() {
@@ -32,8 +32,8 @@ public class BinarySearchTest {
 
     @ParameterizedTest
     @MethodSource("provideTestData_False")
-    public void testBinarySearch_NotFound(int[] array, int number) {
-        assertFalse(search(array, number));
+    void testBinarySearch_NotFound(int[] array, int number) {
+        assertFalse(bs.search(array, number));
     }
 
     static Stream<Arguments> provideTestData_False() {
