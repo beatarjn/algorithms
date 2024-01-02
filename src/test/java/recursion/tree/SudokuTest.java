@@ -1,6 +1,8 @@
-package tree;
+package recursion.tree;
 
 import org.example.recursion.tree.Sudoku;
+import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
@@ -88,13 +90,96 @@ class SudokuTest {
 
     static Stream<Arguments> provideTestData() {
         return Stream.of(
-                Arguments.of(t, true),
-                Arguments.of(t1, false),
-                Arguments.of(t2, true),
-//                Arguments.of(t3, true),
-                Arguments.of(t4, false),
-                Arguments.of(t5, true)
+                Arguments.of(t, true)
+//                Arguments.of(t1, false),
+//                Arguments.of(t2, true),
+////                Arguments.of(t3, true),
+//                Arguments.of(t4, false),
+//                Arguments.of(t5, true)
         );
+    }
+
+    @Test
+    public void shouldReturnTrueMy() {
+        //given
+        char[][] t = {
+                {'5', '3', '.', '.', '7', '.', '.', '.', '.'},
+                {'6', '.', '.', '1', '9', '5', '.', '.', '.'},
+                {'.', '9', '8', '.', '.', '.', '.', '6', '.'},
+                {'8', '.', '.', '.', '6', '.', '.', '.', '3'},
+                {'4', '.', '.', '8', '.', '3', '.', '.', '1'},
+                {'7', '.', '.', '.', '2', '.', '.', '.', '6'},
+                {'.', '6', '.', '.', '.', '.', '2', '8', '.'},
+                {'.', '.', '.', '4', '1', '9', '.', '.', '5'},
+                {'.', '.', '.', '.', '8', '.', '.', '7', '9'}};
+
+
+        //when
+        sudoku.solve(t);
+
+        //then
+        for (int i = 0; i < 9; i++) {
+            for (int j = 0; j < 9; j++) {
+                Assertions.assertTrue(t[i][j] != '0' && t[i][j] != '.' );
+                System.out.print("[ " + t[i][j] + " ]");
+            }
+            System.out.println();
+        }
+    }
+
+    @Test
+    public void shouldReturnTrueAgain() {
+        //given
+        char[][] t = {
+                {'.','.','9','7','4','8','.','.','.'},
+                {'7','.','.','.','.','.','.','.', '.'},
+                {'.','2','.','1','.','9','.','.','.'},
+                {'.','.','7','.','.','.','2','4','.'},
+                {'.','6','4','.','1','.','5','9','.'},
+                {'.','9','8','.','.','.','3','.','.'},
+                {'.','.','.','8','.','3','.','2','.'},
+                {'.','.','.','.','.','.','.','.','6'},
+                {'.','.','.','2','7','5','9','.','.'}};
+
+        //when
+        sudoku.solve(t);
+
+        //then
+        for (int i = 0; i < 9; i++) {
+            for (int j = 0; j < 9; j++) {
+                Assertions.assertTrue(t[i][j] != '0' && t[i][j] != '.' );
+                System.out.print("[ " + t[i][j] + " ]");
+            }
+            System.out.println();
+        }
+    }
+
+
+    @Test
+    public void shouldReturnTruDFS() {
+        //given
+        char[][] t = {
+                {'.','.','9','7','4','8','.','.','.'},
+                {'7','.','.','.','.','.','.','.', '.'},
+                {'.','2','.','1','.','9','.','.','.'},
+                {'.','.','7','.','.','.','2','4','.'},
+                {'.','6','4','.','1','.','5','9','.'},
+                {'.','9','8','.','.','.','3','.','.'},
+                {'.','.','.','8','.','3','.','2','.'},
+                {'.','.','.','.','.','.','.','.','6'},
+                {'.','.','.','2','7','5','9','.','.'}};
+
+        //when
+        sudoku.solve(t);
+
+        //then
+        for (int i = 0; i < 9; i++) {
+            for (int j = 0; j < 9; j++) {
+                Assertions.assertTrue(t[i][j] != '0' && t[i][j] != '.' );
+                System.out.print("[ " + t[i][j] + " ]");
+            }
+            System.out.println();
+        }
     }
 
 

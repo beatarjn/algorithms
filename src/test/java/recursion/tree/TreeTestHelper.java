@@ -1,4 +1,4 @@
-package tree;
+package recursion.tree;
 
 import org.example.recursion.tree.Node;
 
