@@ -1,5 +1,7 @@
 package org.example.recursion;
 
+import static java.lang.Math.min;
+
 public class Dynamic {
 
     public int findMinRecursive(int[] board, int n) {
@@ -13,15 +15,14 @@ public class Dynamic {
             second = Integer.MAX_VALUE;
         }
         int first = findMinRecursive(board, n - 1) + board[n];
-        return Math.min(first, second);
+        return min(first, second);
     }
 
     public int findMinMemo(int[] board, int n) {
 
-        int[] result = new int[n];
+        int[] result = new int[n + 1];
         result[0] = board[0];
-        result[1] = board[1];
-        for (int i = 2; i < result.length; i++) {
+        for (int i = 1; i < result.length; i++) {
             result[i] = -1;
         }
         return memo(board, n, result);
@@ -53,8 +54,48 @@ public class Dynamic {
         }
         first = val1 + board[n];
 
-        result[n] = Math.min(first, second);
+        result[n] = min(first, second);
 
-        return Math.min(first, second);
+        return min(first, second);
+    }
+
+    public int findMinDyn(int[] board, int n) {
+        int[] dp = new int[n + 1];
+        dp[0] = board[0];
+
+        for (int i = 1; i < dp.length; i++) {
+            dp[i] = -1;
+        }
+        int first;
+        int sec;
+
+        for (int i = 1; i < dp.length; i++) {
+            if (i == 1) {
+                sec = Integer.MAX_VALUE;
+            } else {
+                sec = dp[i - 2];
+            }
+            first = dp[i - 1];
+            int val = min(first, sec);
+            dp[i] = val + board[i];
+        }
+        return dp[dp.length - 1];
+    }
+
+    public static int findMinDp(int[] board, int n) {
+        int[] result = new int[n + 1];
+        result[0] = board[0];
+        for (int i = 1; i < n + 1; i++) {
+            result[i] = -1;
+        }
+
+        for (int i = 1; i < result.length; i++) {
+            int left = board[i] + result[i - 1];
+            int right = board[i] + (i - 2 < 0 ? result[i - 1] : result[i - 2]);
+
+            int min = min(left, right);
+            result[i] = min;
+        }
+        return result[result.length - 1];
     }
 }

@@ -55,5 +55,17 @@ class DynamicTest {
         Assertions.assertEquals(16, result);
     }
 
+    @Test
+    void shouldReturn16Dyn() {
+        //given
+        int[] stairs = new int[]{1, 4, 5, 2, 3, 9};
+
+        //when
+        int result = dynamic.findMinDyn(stairs, stairs.length - 1);
+
+        //then
+        Assertions.assertEquals(16, result);
+    }
+
 
 }
