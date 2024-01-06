@@ -33,6 +33,13 @@ class ClimbingStairsTest {
         assertEquals(expected, result);
     }
 
+    @ParameterizedTest
+    @MethodSource("provideTestData")
+    void climbStairsDpMap(int n, int expected) {
+        int result = cs.climbStairsDpMap(n);
+        assertEquals(expected, result);
+    }
+
     static Stream<Arguments> provideTestData() {
         return Stream.of(
                 Arguments.of(1, 1),

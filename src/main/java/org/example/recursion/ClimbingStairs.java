@@ -1,5 +1,9 @@
 package org.example.recursion;
 
+import java.util.HashMap;
+import java.util.Map;
+import java.util.stream.IntStream;
+
 public class ClimbingStairs {
 
 //    You are climbing a staircase. It takes n steps to reach the top.
@@ -62,6 +66,15 @@ public class ClimbingStairs {
             dp[i] = dp[i - 1] + dp[i - 2];
         }
         return dp[n];
+    }
+
+    public int climbStairsDpMap(int n) {
+        Map<Integer, Integer> map = new HashMap<>();
+        map.put(0, 1);
+        map.put(1, 1);
+        IntStream.rangeClosed(2, n)
+                .forEach(i -> map.put(i, map.get(i - 1) + map.get(i - 2)));
+        return map.get(n);
     }
 
 }
