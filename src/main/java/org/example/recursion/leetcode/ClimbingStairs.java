@@ -1,4 +1,4 @@
-package org.example.recursion;
+package org.example.recursion.leetcode;
 
 import java.util.HashMap;
 import java.util.Map;
